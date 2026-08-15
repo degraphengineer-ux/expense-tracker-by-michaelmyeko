@@ -1,0 +1,13 @@
+h4 {
+  color: #333;
+  background-color: red;
+}
+
+input {
+  border: 2px solid blue;
+  padding: 5px;
+}
+
+.your-expenses h2 {
+  color: green;
+}
