@@ -1,80 +1,140 @@
-/* General Styling */
+/* Color Palette & Global Variables */
+:root {
+  --bg-color: #f4f7f6;
+  --card-bg: #ffffff;
+  --primary-color: #1e3d59;
+  --accent-color: #17b978;
+  --accent-hover: #139e66;
+  --text-dark: #333333;
+  --text-muted: #666666;
+  --border-color: #e0e0e0;
+  --table-alt-row: #f9fbfb;
+}
+
+/* Typography & General Body Setup */
 body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
+  font-family: 'Open Sans', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-dark);
+  margin: 0;
+  padding: 20px;
   line-height: 1.6;
 }
 
-/* 1. Expense Table Styling */
-.expense-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 15px;
+h1, h2, h3, h4 {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--primary-color);
+  margin-top: 0;
 }
 
-.expense-table th,
-.expense-table td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: left;
+.container {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-/* Colored Header Row */
-.expense-table th {
-  background-color: #2c3e50;
-  color: #ffffff;
+/* CSS Box Model: Card Components */
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-/* Position Pseudo-class: Alternating Row Colors (Requirement 1 & 5) */
-.expense-table tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
+/* Header Section */
+.header-card h1 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
 }
 
-/* Interactive Hover State (Requirement 4) */
-.expense-table tbody tr:hover {
-  background-color: #f1f1f1;
+summary {
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--primary-color);
 }
 
-/* 2 & 4. Button & Interactive Pointer */
-button[type="button"] {
-  cursor: pointer; /* Requirement 4 */
-  padding: 8px 16px;
-  background-color: #27ae60;
-  color: white;
-  border: none;
-  border-radius: 4px;
+/* Form Layout & Input Styling */
+.add-expense-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-button[type="button"]:hover {
-  background-color: #219150;
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-/* 5. Advanced CSS Selectors Applied */
-
-/* Descendant Selector */
-.your-expenses td {
+label {
+  font-weight: 600;
   font-size: 14px;
 }
 
-/* Direct Child Selector */
-.add-expense-section > form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 400px;
-  margin-bottom: 30px;
-}
-
-/* Focus State Pseudo-class */
-input:focus,
-select:focus {
-  outline: 2px solid #3498db;
-  background-color: #eaf2f8;
-}
-
-/* Negation Pseudo-class */
-input:not([type="button"]) {
-  padding: 8px;
-  border: 1px solid #ccc;
+input, select {
+  padding: 10px;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+input:focus, select:focus {
+  outline: 2px solid var(--primary-color);
+  border-color: transparent;
+}
+
+button {
+  cursor: pointer;
+  padding: 12px;
+  background-color: var(--accent-color);
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  transition: background-color 0.2s ease;
+  align-self: flex-start;
+}
+
+button:hover {
+  background-color: var(--accent-hover);
+}
+
+/* Expense Table Styling */
+.expense-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.expense-table th, 
+.expense-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.expense-table th {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+.expense-table tbody tr:nth-child(even) {
+  background-color: var(--table-alt-row);
+}
+
+.expense-table tbody tr:hover {
+  background-color: #edf5f5;
+}
+
+/* Video Section Embed */
+.video-section iframe {
+  border-radius: 6px;
 }
