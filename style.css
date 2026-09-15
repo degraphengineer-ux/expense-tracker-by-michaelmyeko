@@ -1,13 +1,80 @@
-h4 {
-  color: #333;
-  background-color: red;
+/* General Styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  line-height: 1.6;
 }
 
-input {
-  border: 2px solid blue;
-  padding: 5px;
+/* 1. Expense Table Styling */
+.expense-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
 }
 
-.your-expenses h2 {
-  color: green;
+.expense-table th,
+.expense-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+/* Colored Header Row */
+.expense-table th {
+  background-color: #2c3e50;
+  color: #ffffff;
+}
+
+/* Position Pseudo-class: Alternating Row Colors (Requirement 1 & 5) */
+.expense-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Interactive Hover State (Requirement 4) */
+.expense-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* 2 & 4. Button & Interactive Pointer */
+button[type="button"] {
+  cursor: pointer; /* Requirement 4 */
+  padding: 8px 16px;
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+button[type="button"]:hover {
+  background-color: #219150;
+}
+
+/* 5. Advanced CSS Selectors Applied */
+
+/* Descendant Selector */
+.your-expenses td {
+  font-size: 14px;
+}
+
+/* Direct Child Selector */
+.add-expense-section > form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  margin-bottom: 30px;
+}
+
+/* Focus State Pseudo-class */
+input:focus,
+select:focus {
+  outline: 2px solid #3498db;
+  background-color: #eaf2f8;
+}
+
+/* Negation Pseudo-class */
+input:not([type="button"]) {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
