@@ -2,26 +2,26 @@
 
 **By Michael Myeko**
 
-A sleek, intuitive, and modern web application dashboard designed to help users take control of their personal finances. Built as the foundational shell for modern web budgeting apps, this interface allows users to seamlessly view financial category statistics, log daily transactions, and monitor financial health through a clean and responsive layout[cite: 3].
+A sleek, intuitive, and modern web application dashboard designed to help users take control of their personal finances. Built as the foundational shell for modern web budgeting apps, this interface allows users to seamlessly view financial category statistics, log daily transactions, and monitor financial health through a clean, responsive layout.
 
-## ✨ Features & Rubric Implementation
+## ✨ JavaScript Implementation & Features
 
-- **Macro CSS Grid Layout:** The core dashboard container uses CSS Grid to divide the viewport cleanly into a fixed-width navigation sidebar and a fluid main content area.
-- **Flexbox Internal Alignment:** Flexbox powers the layout of individual component cards, headers, form controls, and sidebar links without using absolute positioning.
-- **Six Category Cards:** Displays realistic static financial statistics across six distinct categories: *Food & Groceries, Transport, Rent & Housing, Entertainment, Savings,* and *Utilities*.
-- **CSS Custom Properties (`:root`):** Centralized theme management utilizing CSS variables for consistent brand colors, surface tones, and typography.
-- **Card Micro-Interactions:** Subtle hover and keyboard focus animations on dashboard cards executing in under 250ms using `transform` and `box-shadow`.
-- **Responsive Design:** Features a mobile media query that collapses the layout into a streamlined single-column view below 768px.
+This project incorporates core JavaScript concepts to transition from a static visual layout to an interactive data-processing application:
+- **Variables & Data Types:** Uses `let` and `const` to store string names, numeric floats for budgets and amounts, booleans for status flags, and arrays of objects for transactions.
+- **User Input Collection:** Integrates browser `prompt()` methods to capture dynamic expense names and numerical values directly from users.
+- **Calculations:** Automatically computes remaining financial balances and aggregates category spending totals.
+- **Reusable Functions:** Leverages specialized functions (`calculateRemainingBalance`, `calculateTotalExpenses`, and `displayFinancialSummary`) to modularize and organize code logic cleanly.
+- **Console Outputs:** Outputs clearly formatted financial reports directly to the browser console for developer inspection.
 
 ## 🛠️ Tech Stack
 
 - **Markup:** HTML5 (Semantic Structure)
 - **Styling:** CSS3 (CSS Grid, Flexbox, Custom Properties, Media Queries)
-- **Typography:** Google Fonts (`Montserrat` for headings, `Open Sans` for body text)[cite: 1]
+- **Programming Logic:** JavaScript (ES6 Variables, Functions, Arrays, Prompts)
+- **Typography:** Google Fonts (`Montserrat`, `Open Sans`)
 - **Version Control:** Git & GitHub
 
 ## 🚀 Getting Started
 
 1. Clone or download this repository to your local machine.
-2. Open the `index.html` file in any modern web browser or use a live server extension to inspect the dashboard shell[cite: 3].
-3. Resize your browser window below 768px using DevTools to test the responsive layout breakpoint.
+2. Open `index.html` in your browser and open the **Browser Developer Console (F12)** to view the executed JavaScript financial reports.
