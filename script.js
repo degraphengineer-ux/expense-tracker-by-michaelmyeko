@@ -1,79 +1,88 @@
 // ==========================================
-// SPENDWISE: JAVASCRIPT FOUNDATION (WEEK 5)
+// SPENDWISE: INTERACTIVITY (WEEK 6)
 // By Michael Myeko
 // ==========================================
 
-// 1. Store Application Data (Variables & Data Types)
-let accountHolder = "Michael";
-let totalBudget = 1200.00; // Number (Float)
-let totalExpenses = 285.00; // Number (Float)
-let isBudgetActive = true; // Boolean
-
-// Array to store expense objects
-let expensesList = [
+// 1. Data Storage: Array of Objects
+let expenses = [
   { name: "Groceries", amount: 150.00, category: "Food" },
-  { name: "Bus Fare", amount: 25.00, category: "Transport" },
-  { name: "Monthly Rent", amount: 800.00, category: "Rent" }
+  { name: "Bus Fare", amount: 25.00, category: "Transport" }
 ];
 
-// 2. Reusable Functions for Calculations
-// Function to calculate remaining balance
-function calculateRemainingBalance(budget, expenses) {
-  return budget - expenses;
-}
+let monthlyBudget = 1000.00; // Simulated budget for conditional logic
 
-// Function to calculate total expenses dynamically from an array
-function calculateTotalExpenses(expensesArray) {
-  let sum = 0;
-  for (let i = 0; i < expensesArray.length; i++) {
-    sum += expensesArray[i].amount;
+// DOM Elements Selection
+const nameInput = document.getElementById('expense-name');
+const amountInput = document.getElementById('expense-amount');
+const categoryInput = document.getElementById('expense-category');
+const addExpenseBtn = document.querySelector('.add-expense-section button');
+const tableBody = document.querySelector('.expense-table tbody');
+const headerText = document.querySelector('.dashboard-header p');
+
+// 2. Process Data with Loops & Update the DOM Dynamically
+function renderDashboard() {
+  // Clear the existing static table rows
+  tableBody.innerHTML = '';
+  
+  let totalSpent = 0;
+
+  // Loop through the expenses array to build table rows dynamically
+  for (let i = 0; i < expenses.length; i++) {
+    let currentExpense = expenses[i];
+    totalSpent += currentExpense.amount;
+
+    // Create a new table row element
+    let tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${currentExpense.name}</td>
+      <td>$${currentExpense.amount.toFixed(2)}</td>
+      <td>${currentExpense.category}</td>
+    `;
+    
+    // Append the new row to the table body
+    tableBody.appendChild(tr);
   }
-  return sum;
-}
 
-// Function to display formatted financial summary in the browser console
-function displayFinancialSummary(user, budget, expenses) {
-  let remaining = calculateRemainingBalance(budget, expenses);
+  // 3. Implement Decision Making (Conditionals) for Budget Feedback
+  let remainingBalance = monthlyBudget - totalSpent;
   
-  console.log("==========================================");
-  console.log(` 📊 SPENDWISE FINANCIAL REPORT FOR: ${user}`);
-  console.log("==========================================");
-  console.log(`Total Starting Budget : $${budget.toFixed(2)}`);
-  console.log(`Total Tracked Expenses: $${expenses.toFixed(2)}`);
-  console.log(`Remaining Balance     : $${remaining.toFixed(2)}`);
-  console.log("Status: " + (remaining >= 0 ? "You are within budget! 👍" : "Warning: Over budget! ⚠️"));
-  console.log("==========================================");
-}
-
-// 3. Collect User Input (Interactive Prompt)
-function promptUserForExpense() {
-  let userInputName = prompt("Enter new expense name:");
-  
-  if (userInputName) {
-    let userInputAmount = prompt("Enter expense amount ($):");
-    let parsedAmount = parseFloat(userInputAmount);
-
-    if (!isNaN(parsedAmount) && parsedAmount > 0) {
-      // Add new expense to our list
-      expensesList.push({ name: userInputName, amount: parsedAmount, category: "General" });
-      
-      // Recalculate total expenses
-      totalExpenses = calculateTotalExpenses(expensesList);
-      
-      console.log(`✅ Successfully added expense: ${userInputName} ($${parsedAmount.toFixed(2)})`);
-      
-      // Display updated summary
-      displayFinancialSummary(accountHolder, totalBudget, totalExpenses);
-    } else {
-      console.log("❌ Invalid amount entered. Please enter a valid number.");
-    }
+  if (totalSpent > monthlyBudget) {
+    headerText.innerHTML = `Welcome back, Michael! ⚠️ <strong>Warning:</strong> You are over budget by $${Math.abs(remainingBalance).toFixed(2)}!`;
+    headerText.style.color = "red";
   } else {
-    console.log("ℹ️ Expense entry cancelled.");
+    headerText.innerHTML = `Welcome back, Michael! You have <strong>$${remainingBalance.toFixed(2)}</strong> left in your budget this month.`;
+    headerText.style.color = "inherit";
   }
 }
 
-// Execute initial report on page load
-displayFinancialSummary(accountHolder, totalBudget, totalExpenses);
+// 4. Handle User Interactions (Event Listeners)
+addExpenseBtn.addEventListener('click', function(event) {
+  event.preventDefault(); // Prevents the form from refreshing the page
+  
+  let nameValue = nameInput.value.trim();
+  let amountValue = parseFloat(amountInput.value);
+  let categoryValue = categoryInput.value;
 
-// Uncomment the line below if you want the prompt to trigger automatically when the page opens:
-// promptUserForExpense();
+  // Conditional: Validate user input
+  if (nameValue === "" || isNaN(amountValue) || amountValue <= 0) {
+    alert("Please enter a valid expense name and a positive amount.");
+    return; // Stop the function if validation fails
+  }
+
+  // Add the new expense to our array
+  expenses.push({
+    name: nameValue,
+    amount: amountValue,
+    category: categoryValue
+  });
+
+  // Clear the input fields for the next entry
+  nameInput.value = '';
+  amountInput.value = '';
+
+  // Re-render the dashboard to show the new expense
+  renderDashboard();
+});
+
+// 5. Initial Render on Page Load
+renderDashboard();
