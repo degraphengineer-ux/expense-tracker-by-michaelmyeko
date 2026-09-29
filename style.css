@@ -8,7 +8,8 @@
   --text-dark: #333333;
   --text-muted: #666666;
   --border-color: #e0e0e0;
-  --table-alt-row: #f9fbfb;
+  --sidebar-bg: #112233;
+  --sidebar-text: #ffffff;
 }
 
 /* Typography & General Body Setup */
@@ -17,7 +18,6 @@ body {
   background-color: var(--bg-color);
   color: var(--text-dark);
   margin: 0;
-  padding: 20px;
   line-height: 1.6;
 }
 
@@ -27,51 +27,121 @@ h1, h2, h3, h4 {
   margin-top: 0;
 }
 
-.container {
-  max-width: 800px;
-  margin: 0 auto;
+/* Macro Layout: CSS Grid for Dashboard Shell */
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
 }
 
-/* CSS Box Model: Card Components */
+/* Sidebar Styling (Flexbox) */
+.sidebar {
+  background-color: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.sidebar h2 {
+  color: var(--sidebar-text);
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar nav a {
+  color: #a0aec0;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 6px;
+  display: block;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+/* Main Content Area */
+.main-content {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow-y: auto;
+}
+
+/* Card Components (CSS Box Model) */
 .card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  padding: 24px;
-  margin-bottom: 24px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+  /* Requirement: Micro-interactions under 250ms using transform & box-shadow */
+  transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
-/* Header Section */
-.header-card h1 {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
+/* Card Hover & Focus States (Requirement 5) */
+.card:hover, 
+.card:focus {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+  outline: none;
 }
 
-summary {
+/* Category Cards Grid */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.category-card .amount {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin: 8px 0;
+}
+
+.status-tag {
+  font-size: 12px;
+  background-color: #e6f8f0;
+  color: var(--accent-color);
+  padding: 4px 8px;
+  border-radius: 4px;
   font-weight: 600;
-  cursor: pointer;
-  color: var(--primary-color);
 }
 
-/* Form Layout & Input Styling */
-.add-expense-section form {
+/* Content Grid for Form and Table */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* Form Layout (Flexbox) */
+form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-}
-
-label {
-  font-weight: 600;
-  font-size: 14px;
+  gap: 4px;
 }
 
 input, select {
@@ -79,62 +149,52 @@ input, select {
   border: 1px solid var(--border-color);
   border-radius: 4px;
   font-family: inherit;
-  font-size: 14px;
-}
-
-input:focus, select:focus {
-  outline: 2px solid var(--primary-color);
-  border-color: transparent;
 }
 
 button {
   cursor: pointer;
-  padding: 12px;
+  padding: 10px;
   background-color: var(--accent-color);
   color: #ffffff;
   border: none;
   border-radius: 4px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  font-size: 15px;
   transition: background-color 0.2s ease;
-  align-self: flex-start;
 }
 
 button:hover {
   background-color: var(--accent-hover);
 }
 
-/* Expense Table Styling */
+/* Tables */
 .expense-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 12px;
 }
 
-.expense-table th, 
-.expense-table td {
-  padding: 12px 15px;
+.expense-table th, .expense-table td {
+  padding: 10px;
   text-align: left;
   border-bottom: 1px solid var(--border-color);
+  font-size: 14px;
 }
 
 .expense-table th {
   background-color: var(--primary-color);
-  color: #ffffff;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
+  color: #fff;
 }
 
-.expense-table tbody tr:nth-child(even) {
-  background-color: var(--table-alt-row);
-}
+/* Responsive Media Query (Requirement 4: below 768px collapses to single column) */
+@media (max-width: 768px) {
+  .dashboard-container {
+    grid-template-columns: 1fr;
+  }
 
-.expense-table tbody tr:hover {
-  background-color: #edf5f5;
-}
+  .sidebar {
+    display: none; /* Can be toggled or hidden on mobile dashboard shells */
+  }
 
-/* Video Section Embed */
-.video-section iframe {
-  border-radius: 6px;
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
 }
