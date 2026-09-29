@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Budget Tracker</title>
-    <!-- Google Fonts Integration (Montserrat for Headings, Open Sans for Body) -->
+    <title>SpendWise Dashboard</title>
+    <!-- Google Fonts Integration -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,116 +14,119 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
-      <!-- Card 1: Page Heading & Instructions -->
-      <header class="card header-card">
-        <h1>
-          <img src="https://via.placeholder.com/40" alt="Budget Tracker Logo" width="40" />
-          My Budget Tracker
-        </h1>
-        <h4>Track your income and expenses in one place.</h4>
+    <!-- Dashboard App Container (CSS Grid Layout) -->
+    <div class="dashboard-container">
+      
+      <!-- 1. Sidebar / Navigation Menu -->
+      <aside class="sidebar">
+        <h2>SpendWise</h2>
+        <nav>
+          <ul>
+            <li><a href="#" class="active">Dashboard</a></li>
+            <li><a href="#">Expenses</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">Analytics</a></li>
+            <li><a href="#">Settings</a></li>
+          </ul>
+        </nav>
+      </aside>
 
-        <details>
-          <summary>How to use this tracker</summary>
-          <p>
-            Use the form below to enter your expense details. Select a category, fill in the amount and name, then click 'Add Expense' to organize your budget.
-          </p>
-        </details>
-      </header>
+      <!-- Main Content Area -->
+      <div class="main-content">
+        
+        <!-- 2. Header Section -->
+        <header class="dashboard-header">
+          <h1>Dashboard Overview</h1>
+          <p>Welcome back, Michael! Track your financial health below.</p>
+        </header>
 
-      <!-- Card 2: Add Expense Form -->
-      <section class="card add-expense-section">
-        <h2>Add New Expense</h2>
-        <form action="#" method="POST">
-          <div class="form-group">
-            <label for="expense-name">Expense Name:</label>
-            <input type="text" id="expense-name" placeholder="Enter expense name" required />
+        <!-- 3. At Least Six Category Cards -->
+        <section class="categories-grid">
+          <div class="card category-card" tabindex="0">
+            <h3>Food & Groceries</h3>
+            <p class="amount">$150.00</p>
+            <span class="status-tag">On Track</span>
           </div>
-
-          <div class="form-group">
-            <label for="expense-amount">Amount ($):</label>
-            <input type="number" id="expense-amount" placeholder="Enter expense amount" required />
+          <div class="card category-card" tabindex="0">
+            <h3>Transport</h3>
+            <p class="amount">$45.00</p>
+            <span class="status-tag">Moderate</span>
           </div>
-
-          <div class="form-group">
-            <label for="expense-category">Category:</label>
-            <select id="expense-category" name="category">
-              <option value="food">Food</option>
-              <option value="transport">Transport</option>
-              <option value="rent">Rent</option>
-              <option value="entertainment">Entertainment</option>
-              <option value="other">Other</option>
-            </select>
+          <div class="card category-card" tabindex="0">
+            <h3>Rent & Housing</h3>
+            <p class="amount">$800.00</p>
+            <span class="status-tag">Paid</span>
           </div>
-
-          <div class="form-group">
-            <label for="expense-date">Date:</label>
-            <input type="date" id="expense-date" />
+          <div class="card category-card" tabindex="0">
+            <h3>Entertainment</h3>
+            <p class="amount">$60.00</p>
+            <span class="status-tag">Saved</span>
           </div>
+          <div class="card category-card" tabindex="0">
+            <h3>Savings</h3>
+            <p class="amount">$300.00</p>
+            <span class="status-tag">Growing</span>
+          </div>
+          <div class="card category-card" tabindex="0">
+            <h3>Utilities</h3>
+            <p class="amount">$95.00</p>
+            <span class="status-tag">Due Soon</span>
+          </div>
+        </section>
 
-          <button type="button" id="add-expense-btn">Add Expense</button>
-        </form>
-      </section>
+        <!-- 4. Expense Form & Table Section -->
+        <div class="content-grid">
+          <section class="card add-expense-section">
+            <h2>Add New Expense</h2>
+            <form action="#" method="POST">
+              <div class="form-group">
+                <label for="expense-name">Expense Name:</label>
+                <input type="text" id="expense-name" placeholder="Enter expense name" required />
+              </div>
+              <div class="form-group">
+                <label for="expense-amount">Amount ($):</label>
+                <input type="number" id="expense-amount" placeholder="Enter amount" required />
+              </div>
+              <div class="form-group">
+                <label for="expense-category">Category:</label>
+                <select id="expense-category" name="category">
+                  <option value="food">Food</option>
+                  <option value="transport">Transport</option>
+                  <option value="rent">Rent</option>
+                  <option value="entertainment">Entertainment</option>
+                </select>
+              </div>
+              <button type="button">Add Expense</button>
+            </form>
+          </section>
 
-      <!-- Card 3: Expense Table -->
-      <section class="card your-expenses">
-        <h2>Your Expenses</h2>
-        <table class="expense-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Amount</th>
-              <th>Category</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Groceries</td>
-              <td>$150.00</td>
-              <td>Food</td>
-              <td>2026-09-10</td>
-            </tr>
-            <tr>
-              <td>Bus Fare</td>
-              <td>$25.00</td>
-              <td>Transport</td>
-              <td>2026-09-11</td>
-            </tr>
-            <tr>
-              <td>Monthly Rent</td>
-              <td>$800.00</td>
-              <td>Rent</td>
-              <td>2026-09-01</td>
-            </tr>
-            <tr>
-              <td>Movie Night</td>
-              <td>$30.00</td>
-              <td>Entertainment</td>
-              <td>2026-09-12</td>
-            </tr>
-            <tr>
-              <td>Internet Bill</td>
-              <td>$60.00</td>
-              <td>Other</td>
-              <td>2026-09-05</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+          <section class="card your-expenses">
+            <h2>Recent Transactions</h2>
+            <table class="expense-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Amount</th>
+                  <th>Category</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Groceries</td>
+                  <td>$150.00</td>
+                  <td>Food</td>
+                </tr>
+                <tr>
+                  <td>Bus Fare</td>
+                  <td>$25.00</td>
+                  <td>Transport</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </div>
 
-      <!-- Video Tips Section -->
-      <section class="card video-section">
-        <h3>Budgeting Tips</h3>
-        <iframe
-          width="100%"
-          height="315"
-          src="https://www.youtube.com/embed/sVKQn2IftKc"
-          title="Budgeting Tips Video"
-          frameborder="0"
-          allowfullscreen>
-        </iframe>
-      </section>
+      </div>
     </div>
   </body>
 </html>
